@@ -31,6 +31,8 @@ Things you may want to cover:
 |email     |string |NOT NULL,unique:true |
 |password  |string |NOT NULL |
 |birthday  |integer|NOT NULL |
+|name|string|NOT NULL|
+|read_name |string|NOT NULL|
 
 
 ### Association
