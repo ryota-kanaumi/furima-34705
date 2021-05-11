@@ -23,13 +23,13 @@ Things you may want to cover:
 
 * ...
 
-## USERS TABLE　＊ユーザー情報
+## users　＊ユーザー情報
 
 |Column    |Type   |Options  |
 |----------|-------|---------|
 |nickname  |string |NOT NULL,unique:true |
 |email     |string |NOT NULL,unique:true |
-|password  |string |NOT NULL |
+|encrypted_password  |string |NOT NULL |
 |birthday  |integer|NOT NULL |
 |name|string|NOT NULL|
 |read_name |string|NOT NULL|
@@ -37,51 +37,50 @@ Things you may want to cover:
 
 ### Association
 has_many :products
-has_one :shipping_address *配送先住所
-has_one :purchase record ＊購入者情報テーブル
+has_one :purchase_record ＊購入者情報テーブル
 
-## Products TABLE　＊商品情報
+## products　＊商品情報
 
 |Column    |Type       |Options  |
 |----------|-----------|---------|
-|user      |references |
+|user      |references |foreign_key: true|
 image (ActiveStorageで実装)
 |product_name|text     |NOT NULL |
-|category  |string     |NOT NULL |
-|product condition|string|NOT NULL|
-|Delivery charge|string|NOT NULL|
-|Delivery day|integer|NOT NULL|
+|category_id  |string     |NOT NULL |
+|product_condition_id|string|NOT NULL|
+|delivery_charge_id|string|NOT NULL|
+|shipping_area_id|string|NOT NULL|
+|delivery_day_id|integer|NOT NULL|
 |price|integer|NOT NULL|
 
 ### Association
-belongs_to :users
+belongs_to :user
 has_one :shipping_address 
-has_one :purchase record Table
+has_one :purchase_record 
 
-## Shipping address Table　*配送先住所
+## shipping_address　*配送先住所
 
 |Column    |Type       |Options  |
 |----------|-----------|---------|
-|Postal code|integer   |NOT NULL |
-|Prefectures_都道府県|string    |NOT NULL |
-|Municipality_市町村|string|NOT NULL|
-|Address_番地|string|NOT NULL|
-|Building name_建物名|string| |
-|Phone number|integer|NOT NULL|
-|purchase|references| |
-|user|references| |
+|postal_code|integer   |NOT NULL |
+|prefectures_id|string    |NOT NULL |
+|municipality|string|NOT NULL|
+|address|string|NOT NULL|
+|building_name|string| |
+|phone_number|integer|NOT NULL|
+|purchase|references|foreign_key: true|
+|user|references|foreign_key: true|
 
 ### Association
-has_one :users
 has_one :products
 has_one :purchase_record 
 
-## Purchase Record TABLE　＊購入者情報
+## purchase_record TABLE　＊購入者情報
 |Column    |Type       |Options  |
 |----------|-----------|---------|
-|product   |references | |
-|user      |references | |
+|product   |references |foreign_key: true|
+|user      |references |foreign_key: true|
 
-has_one :users
+has_many :users
 has_one :products
-has_one :shipping address
+has_one :shipping_address
