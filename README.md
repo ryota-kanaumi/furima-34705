@@ -84,5 +84,5 @@ belongs_to :purchase_record
 
 ### Association
 belongs_to :user
-has_one :product
+belongs_to :product
 has_one :shipping_address
