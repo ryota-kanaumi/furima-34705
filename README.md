@@ -29,15 +29,16 @@ Things you may want to cover:
 |----------|-------|---------|
 |nickname  |string |NOT NULL,unique:true |
 |email     |string |NOT NULL,unique:true |
-|encrypted_password  |string |NOT NULL |
-|birthday  |integer|NOT NULL |
-|name|string|NOT NULL|
+|encrypted_password|string |NOT NULL |
+|birthday  |data   |NOT NULL |
+|last_name |string|NOT NULL|
+|first_name|string|NOT NULL|
 |read_name |string|NOT NULL|
 
 
 ### Association
 has_many :products
-has_one :purchase_record ＊購入者情報テーブル
+has_many :purchase_record ＊購入者情報テーブル
 
 ## products　＊商品情報
 
@@ -46,19 +47,19 @@ has_one :purchase_record ＊購入者情報テーブル
 |user      |references |foreign_key: true|
 image (ActiveStorageで実装)
 |product_name|text     |NOT NULL |
-|category_id  |string     |NOT NULL |
-|product_condition_id|string|NOT NULL|
-|delivery_charge_id|string|NOT NULL|
-|shipping_area_id|string|NOT NULL|
+|product_description|text|NOT NULL|
+|category_id  |integer|NOT NULL |
+|product_condition_id|integer|NOT NULL|
+|delivery_charge_id|integer|NOT NULL|
+|shipping_area_id|integer|NOT NULL|
 |delivery_day_id|integer|NOT NULL|
 |price|integer|NOT NULL|
 
 ### Association
 belongs_to :user
-has_one :shipping_address 
 has_one :purchase_record 
 
-## shipping_address　*配送先住所
+## shipping_addresses　*配送先住所
 
 |Column    |Type       |Options  |
 |----------|-----------|---------|
@@ -68,19 +69,19 @@ has_one :purchase_record
 |address|string|NOT NULL|
 |building_name|string| |
 |phone_number|integer|NOT NULL|
-|purchase|references|foreign_key: true|
-|user|references|foreign_key: true|
+|purchase_record|references|foreign_key: true|
+
 
 ### Association
 has_one :products
 has_one :purchase_record 
 
-## purchase_record TABLE　＊購入者情報
+## purchase_records ＊購入者情報
 |Column    |Type       |Options  |
 |----------|-----------|---------|
 |product   |references |foreign_key: true|
 |user      |references |foreign_key: true|
 
-has_many :users
-has_one :products
+has_many :user
+has_one :product
 has_one :shipping_address
