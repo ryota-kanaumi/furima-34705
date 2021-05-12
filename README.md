@@ -22,3 +22,67 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+## users　＊ユーザー情報
+
+|Column    |Type   |Options  |
+|----------|-------|---------|
+|nickname  |string |NOT NULL,unique:true |
+|email     |string |NOT NULL,unique:true |
+|encrypted_password|string |NOT NULL |
+|birthday  |date   |NOT NULL |
+|last_name |string|NOT NULL|
+|first_name|string|NOT NULL|
+|last_read_name |string|NOT NULL|
+|first_read_name|string|NOT NULL|
+
+
+### Association
+has_many :products
+has_many :purchase_records ＊購入者情報テーブル
+
+## products　＊商品情報
+
+|Column    |Type       |Options  |
+|----------|-----------|---------|
+|user      |references |foreign_key: true|
+image (ActiveStorageで実装)
+|product_name|text     |NOT NULL |
+|product_description|text|NOT NULL|
+|category_id  |integer|NOT NULL |
+|product_condition_id|integer|NOT NULL|
+|delivery_charge_id|integer|NOT NULL|
+|shipping_area_id|integer|NOT NULL|
+|delivery_day_id|integer|NOT NULL|
+|price|integer|NOT NULL|
+
+### Association
+belongs_to :user
+has_one :purchase_record 
+
+## shipping_addresses　*配送先住所
+
+|Column    |Type       |Options  |
+|----------|-----------|---------|
+|postal_code|string   |NOT NULL |
+|prefectures_id|string    |NOT NULL |
+|municipality|string|NOT NULL|
+|address|string|NOT NULL|
+|building_name|string| |
+|phone_number|string|NOT NULL|
+|purchase_record|references|foreign_key: true|
+
+
+### Association
+belongs_to :purchase_record 
+
+## purchase_records ＊購入者情報
+|Column    |Type       |Options  |
+|----------|-----------|---------|
+|product   |references |foreign_key: true|
+|user      |references |foreign_key: true|
+
+### Association
+belongs_to :user
+belongs_to :product
+has_one :shipping_address
