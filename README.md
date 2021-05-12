@@ -30,15 +30,16 @@ Things you may want to cover:
 |nickname  |string |NOT NULL,unique:true |
 |email     |string |NOT NULL,unique:true |
 |encrypted_password|string |NOT NULL |
-|birthday  |data   |NOT NULL |
+|birthday  |date   |NOT NULL |
 |last_name |string|NOT NULL|
 |first_name|string|NOT NULL|
-|read_name |string|NOT NULL|
+|last_read_name |string|NOT NULL|
+|first_read_name|string|NOT NULL|
 
 
 ### Association
 has_many :products
-has_many :purchase_record ＊購入者情報テーブル
+has_many :purchase_records ＊購入者情報テーブル
 
 ## products　＊商品情報
 
@@ -63,18 +64,17 @@ has_one :purchase_record
 
 |Column    |Type       |Options  |
 |----------|-----------|---------|
-|postal_code|integer   |NOT NULL |
+|postal_code|string   |NOT NULL |
 |prefectures_id|string    |NOT NULL |
 |municipality|string|NOT NULL|
 |address|string|NOT NULL|
 |building_name|string| |
-|phone_number|integer|NOT NULL|
+|phone_number|string|NOT NULL|
 |purchase_record|references|foreign_key: true|
 
 
 ### Association
-has_one :products
-has_one :purchase_record 
+belongs_to :purchase_record 
 
 ## purchase_records ＊購入者情報
 |Column    |Type       |Options  |
@@ -82,6 +82,7 @@ has_one :purchase_record
 |product   |references |foreign_key: true|
 |user      |references |foreign_key: true|
 
-has_many :user
+### Association
+belongs_to :user
 has_one :product
 has_one :shipping_address
