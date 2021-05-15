@@ -23,7 +23,7 @@ Things you may want to cover:
 
 * ...
 
-## users　＊ユーザー情報
+## users ＊ユーザー情報
 
 |Column    |Type   |Options  |
 |----------|-------|---------|
@@ -41,7 +41,7 @@ Things you may want to cover:
 has_many :products
 has_many :purchase_records ＊購入者情報テーブル
 
-## products　＊商品情報
+## products ＊商品情報
 
 |Column    |Type       |Options  |
 |----------|-----------|---------|
@@ -60,7 +60,7 @@ image (ActiveStorageで実装)
 belongs_to :user
 has_one :purchase_record 
 
-## shipping_addresses　*配送先住所
+## shipping_addresses *配送先住所
 
 |Column    |Type       |Options  |
 |----------|-----------|---------|
