@@ -12,6 +12,9 @@ require 'rails_helper'
         @user.password = @user.password
         expect(@user).to be_valid
       end
+      it 'nicknameとemail、passwordとpassword_confirmationが一致すれば登録できる' do
+        expect(@user).to be_valid
+      end
       it 'last_nameが漢字であれば登録できる' do
         @user.last_name = @user.last_name
         expect(@user).to be_valid
@@ -73,6 +76,18 @@ require 'rails_helper'
       @user.valid?
       expect(@user.errors.full_messages).to include "First read name is invalid"
      end
-   end
- end
+     it '重複したemailが存在する場合登録できない' do
+      @user.save
+      another_user = FactoryBot.build(:user)
+      another_user.email = @user.email
+      another_user.valid?
+      expect(another_user.errors.full_messages).to include('Email has already been taken')
+     end
+      it 'メールアドレスは、@がないと登録できない' do
+        @user.email = 'hogehoge.jp'
+        @user.valid?
+        expect(@user.errors.full_messages).to include "Email is invalid"
+      end
+    end
+  end
 end
