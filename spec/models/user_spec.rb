@@ -51,6 +51,24 @@ require 'rails_helper'
          @user.valid?
          expect(@user.errors.full_messages).to include "Password can't be blank"
      end
+     it "passwordは英字だけでは登録できない" do
+      @user.password = 'aaaaa'
+      @user.password_confirmation = 'aaaaa'
+      @user.valid?
+      expect(@user.errors.full_messages).to include "Password is invalid"
+     end
+     it "passwordは数字だけでは登録できない" do
+      @user.password = '123456'
+      @user.password_confirmation = '123456'
+      @user.valid?
+      expect(@user.errors.full_messages).to include "Password is invalid"
+     end
+     it "passwordに全角が入っていると登録できない" do
+      @user.password = 'ＡＢＣ１２３'
+      @user.password_confirmation = 'ＡＢＣ１２３'
+      @user.valid?
+      expect(@user.errors.full_messages).to include "Password is invalid"
+     end
      it "birthdayが空では登録できない" do
       @user.birthday = ''
       @user.valid?
@@ -61,8 +79,18 @@ require 'rails_helper'
       @user.valid?
       expect(@user.errors.full_messages).to include "Last name is invalid"
      end
+     it "last_nameは半角カタカナでは登録できない" do
+      @user.last_name = 'ﾀﾅｶ'
+      @user.valid?
+      expect(@user.errors.full_messages).to include "Last name is invalid"
+     end
      it "first_nameが空では登録できない" do
       @user.first_name = ''
+      @user.valid?
+      expect(@user.errors.full_messages).to include "First name is invalid"
+     end
+     it "first_nameは半角カタカナでは登録できない" do
+      @user.first_name = 'ﾀﾛｳ'
       @user.valid?
       expect(@user.errors.full_messages).to include "First name is invalid"
      end
@@ -71,8 +99,38 @@ require 'rails_helper'
       @user.valid?
       expect(@user.errors.full_messages).to include "Last read name is invalid"
      end
+     it "last_read_nameがひらがなでは登録できない" do
+      @user.last_read_name = 'たなか'
+      @user.valid?
+      expect(@user.errors.full_messages).to include "Last read name is invalid"
+     end
+     it "last_read_nameが漢字では登録できない" do
+      @user.last_read_name = '田中'
+      @user.valid?
+      expect(@user.errors.full_messages).to include "Last read name is invalid"
+     end
+     it "last_read_nameが半角カタカナでは登録できない" do
+      @user.last_read_name = 'ﾀﾅｶ'
+      @user.valid?
+      expect(@user.errors.full_messages).to include "Last read name is invalid"
+     end
      it "first_read_nameが空では登録できない" do
       @user.first_read_name = ''
+      @user.valid?
+      expect(@user.errors.full_messages).to include "First read name is invalid"
+     end
+     it "first_read_nameがひらがなでは登録できない" do
+      @user.first_read_name = 'たろう'
+      @user.valid?
+      expect(@user.errors.full_messages).to include "First read name is invalid"
+     end
+     it "first_read_nameが漢字では登録できない" do
+      @user.first_read_name = '太郎'
+      @user.valid?
+      expect(@user.errors.full_messages).to include "First read name is invalid"
+     end
+     it "first_read_nameが半角カタカナでは登録できない" do
+      @user.first_read_name = 'ﾀﾛｳ'
       @user.valid?
       expect(@user.errors.full_messages).to include "First read name is invalid"
      end
