@@ -10,12 +10,15 @@ class ProductsController < ApplicationController
   end
 
   def create
+    unless user_signed_in?
+      redirect_to root_path
+    end
     @product = Product.create(product_params)
     @product.save
     if @product.save
       redirect_to root_path
     else
-      render action: :edit
+      render action: :new
     end
   end
 
@@ -33,8 +36,8 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    binding.pry
     params.require(:product).permit(:image, :product_name, :product_description, :category_id, :product_condition_id, :delivery_charge_id, :shipping_area_id, :delivery_day_id, :price)
   end
 
+  
 end
