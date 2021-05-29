@@ -30,13 +30,14 @@ class ProductsController < ApplicationController
   end
 
   def show
-
+    @product = Prototype.find(params[:id])
   end
 
   private
 
   def product_params
-    params.require(:product).permit(:image, :product_name, :product_description, :category_id, :product_condition_id, :delivery_charge_id, :shipping_area_id, :delivery_day_id, :price)
+    params.require(:product).permit(:image, :product_name, :product_description, :category_id, :product_condition_id, 
+      :delivery_charge_id, :shipping_area_id, :delivery_day_id, :price).merge(user_id: current_user.id)
   end
 
   
