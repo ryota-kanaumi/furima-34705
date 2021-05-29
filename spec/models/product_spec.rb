@@ -55,7 +55,7 @@ RSpec.describe Product, type: :model do
         expect(@product.errors.full_messages).to include "Product description can't be blank"
        end
        it "カテゴリーIDを選択しないと出品できない" do
-        @product.category_id = '1'
+        @product.category_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include "Category Select"
        end
@@ -91,6 +91,16 @@ RSpec.describe Product, type: :model do
        end
        it "販売価格が9,999,999を超えると出品できない" do
         @product.price = 10000000
+        @product.valid?
+        expect(@product.errors.full_messages).to include "Price Out of setting range"
+       end
+       it "販売価格が英数字混合では登録できないこと" do
+        @product.price = '123abc'
+        @product.valid?
+        expect(@product.errors.full_messages).to include "Price Out of setting range"
+       end
+       it "販売価格が半角英字では登録できないこと" do
+        @product.price = 'abcde'
         @product.valid?
         expect(@product.errors.full_messages).to include "Price Out of setting range"
        end
