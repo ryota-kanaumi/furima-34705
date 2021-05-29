@@ -44,6 +44,11 @@ RSpec.describe Product, type: :model do
   end
   context '商品出品がうまく行かないとき' do
     describe "商品の新規出品" do
+      it "imageが空だと出品できない" do
+        @product.image = nil
+        @product.valid?
+        expect(@product.errors.full_messages).to include "Image can't be blank"
+       end
       it "商品名が空だと出品できない" do
         @product.product_name = ''
         @product.valid?
@@ -100,7 +105,7 @@ RSpec.describe Product, type: :model do
         expect(@product.errors.full_messages).to include "Price Out of setting range"
        end
        it "販売価格が半角英字では登録できないこと" do
-        @product.price = 'abcde'
+        @product.price = 'abcdeg'
         @product.valid?
         expect(@product.errors.full_messages).to include "Price Out of setting range"
        end
