@@ -60,37 +60,37 @@ RSpec.describe Product, type: :model do
         expect(@product.errors.full_messages).to include "Category Select"
        end
        it "商品の状態を選択しないと出品できない" do
-        @product.product_condition_id = '1'
+        @product.product_condition_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include "Product condition Select"
        end
        it "配送料の負担を選択しないと出品できない" do
-        @product.delivery_charge_id = '1'
+        @product.delivery_charge_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include "Delivery charge Select"
        end
        it "発送元の地域を選択しないと出品できない" do
-        @product.shipping_area_id = '1'
+        @product.shipping_area_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include "Shipping area Select"
        end
        it "発送までの日数を選択しないと出品できない" do
-        @product.delivery_day_id = '1'
+        @product.delivery_day_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include "Delivery day Select"
        end
        it "価格が全角数字だと出品できない" do
-        @product.price = '５０００'
+        @product.price = '３００'
         @product.valid?
         expect(@product.errors.full_messages).to include "Price Half-width number"
        end
        it "販売価格が300未満だと出品できない" do
-        @product.price = '299'
+        @product.price = 299
         @product.valid?
         expect(@product.errors.full_messages).to include "Price Out of setting range"
        end
        it "販売価格が9,999,999を超えると出品できない" do
-        @product.price = '10000000'
+        @product.price = 10000000
         @product.valid?
         expect(@product.errors.full_messages).to include "Price Out of setting range"
        end
