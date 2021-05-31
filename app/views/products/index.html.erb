@@ -130,7 +130,6 @@
         <%= link_to "#" do %>
         <div class='item-img-content'>
           <%= image_tag product.image, class: "item-img" %>
-
           <%# 商品が売れていればsold outを表示しましょう %>
           <%# <div class='sold-out'> %>
             <%# <span>Sold Out!!</span> %>
@@ -149,8 +148,8 @@
             </div>
           </div>
         </div>
+        <% end %>
       </li>
-     <% end %>
     <% if @products.length == 0 %>
       <li class='list'>
         <%= link_to '#' do %>
@@ -167,13 +166,13 @@
             </div>
           </div>
         </div>
+        <% end %>
       </li>
       <% end %>
     <% end %>
     </ul>
   </div>
 </div>
-<% end %>
 <%= link_to(new_product_path, class: 'purchase-btn') do %>
   <span class='purchase-btn-text'>出品する</span>
   <%= image_tag 'icon_camera.png' , size: '185x50' ,class: "purchase-btn-icon" %>
