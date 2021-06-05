@@ -1,7 +1,8 @@
 class Product < ApplicationRecord
     belongs_to :user, optional: true, dependent: :destroy 
     has_one_attached :image
-
+    has_one :purchase_record 
+    
     #activehashの導入
     extend ActiveHash::Associations::ActiveRecordExtensions
     belongs_to :category
