@@ -2,9 +2,9 @@ class Order
 
   include ActiveModel::Model
   #アトリビュートアクセサーを使用し、保存するカラムをすべて入力
-  attr_accessor :postal_code, :prefecture_id, :municipality, :address, :building_name, :phone_number, :product_id, :user_id
+  attr_accessor :token, :postal_code, :prefecture_id, :municipality, :address, :building_name, :phone_number, :product_id, :user_id
   with_options presence: true do
-    # validates :token
+    validates :token
     VALID_POSTAL_CODE_REGEX = /\A\d{3}[-]?\d{4}\z/ 
     validates :postal_code, format: { with: VALID_POSTAL_CODE_REGEX }
     validates :municipality
@@ -16,7 +16,6 @@ class Order
 
   def save
     purchase_record = PurchaseRecord.create(product_id: product_id, user_id: user_id)
-    binding.pry
     ShippingAddress.create(postal_code: postal_code, prefecture_id: prefecture_id, municipality: municipality, address: address, building_name: building_name, phone_number: phone_number, purchase_record_id: purchase_record.id)
   end
 end
