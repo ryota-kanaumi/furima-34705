@@ -5,11 +5,12 @@ class Order
   attr_accessor :token, :postal_code, :prefecture_id, :municipality, :address, :building_name, :phone_number, :product_id, :user_id
   with_options presence: true do
     validates :token
-    VALID_POSTAL_CODE_REGEX = /\A\d{3}[-]?\d{4}\z/ 
+    VALID_POSTAL_CODE_REGEX = /\A\d{3}[-]\d{4}\z/ 
     validates :postal_code, format: { with: VALID_POSTAL_CODE_REGEX }
-    validates :municipality
+    validates :municipality, format: { with: /\A[ぁ-んァ-ン一-龥]/ }
     validates :address
-    validates :phone_number, numericality:{ with: /\A\d{11}\z/}
+
+    validates :phone_number, numericality: { with: /\A\d{11}\z/ }
   end
 
   validates :prefecture_id, numericality: { other_than: 1, message: 'Select'}

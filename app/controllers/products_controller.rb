@@ -29,6 +29,5 @@ class ProductsController < ApplicationController
     params.require(:product).permit(:image, :product_name, :product_description, :category_id, :product_condition_id, 
       :delivery_charge_id, :shipping_area_id, :delivery_day_id, :price).merge(user_id: current_user.id)
   end
-
-  
+ 
 end
