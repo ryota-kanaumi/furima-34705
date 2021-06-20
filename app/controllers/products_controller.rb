@@ -9,7 +9,6 @@ class ProductsController < ApplicationController
     @products = Product.all.order(created_at: :desc)
   end
 
-
   def create
      @product = Product.new(product_params)
     if @product.save
@@ -21,6 +20,7 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
+
   end
 
   private

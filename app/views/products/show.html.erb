@@ -9,6 +9,7 @@
 
     <div class="item-img-content">
       <%= image_tag @product.image ,class:"item-box-img" %>
+
       <% if @product.purchase_record %>
        <div class="sold-out"> 
          <span>Sold Out!!</span> 
@@ -25,6 +26,7 @@
     </div>
 
     <% if user_signed_in? && current_user.id == @product.user_id %>
+
       <% if @product.purchase_record == nil %>
         <%= link_to "商品の編集", "#", method: :get, class: "item-red-btn" %>
         <p class="or-text">or</p>
@@ -37,6 +39,7 @@
        <%= link_to "購入画面に進む", product_orders_path(@product.id) ,class:"item-red-btn"%>
       <% end %>
     <% end %>
+
 
     <div class="item-explain-box">
       <span><%= @product.product_description %></span>
