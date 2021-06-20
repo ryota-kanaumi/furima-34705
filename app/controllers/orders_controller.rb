@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :move_to_index, :no_purchase
+  before_action :authenticate_user!,:move_to_index, :no_purchase
 
   def index 
     @product = Product.find(params[:product_id])
@@ -39,8 +39,8 @@ class OrdersController < ApplicationController
   end
 
   def move_to_index
-    redirect_to new_user_session_path unless user_signed_in?
     @product = Product.find(params[:product_id])
+    
     if @product.user.id == current_user.id
       redirect_to root_path 
     end
