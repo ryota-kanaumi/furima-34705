@@ -6,5 +6,5 @@ class DeliveryCharge < ActiveHash::Base
   ]
 
   include ActiveHash::Associations
-  has_many :products, dependent: :destroy
+  has_many :products
 end
