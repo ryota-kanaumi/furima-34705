@@ -35,7 +35,6 @@ class ProductsController < ApplicationController
     if @product.save
       redirect_to root_path
     else 
-      @product = Product.new(product_params)
       render action: :edit
     end
   end
