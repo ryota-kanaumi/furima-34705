@@ -9,6 +9,6 @@ class ProductCondition < ActiveHash::Base
     { id: 7, name: '全体的に状態が悪い' },
   ]
   include ActiveHash::Associations
-  has_many :products
+  has_many :products, dependent: :destroy
 
 end

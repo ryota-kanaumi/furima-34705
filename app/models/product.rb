@@ -1,6 +1,6 @@
 class Product < ApplicationRecord
-    belongs_to :user, optional: true, dependent: :destroy 
-    has_one_attached :image
+    belongs_to :user, optional: true
+    has_one_attached :image, dependent: :destroy
 
     #activehashの導入
     extend ActiveHash::Associations::ActiveRecordExtensions
