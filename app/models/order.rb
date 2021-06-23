@@ -10,7 +10,7 @@ class Order
     validates :municipality, format: { with: /\A[ぁ-んァ-ン一-龥]/ }
     validates :address
 
-    validates :phone_number, numericality: { with: /\A\d{11}\z/ }
+    validates :phone_number, numericality: { with: /\A\d{10,11}\z/ }
   end
 
   validates :prefecture_id, numericality: { other_than: 1, message: 'Select'}
