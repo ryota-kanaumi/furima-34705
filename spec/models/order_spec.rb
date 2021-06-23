@@ -3,10 +3,16 @@ require 'rails_helper'
 RSpec.describe Order, type: :model do
   before do
      @order = FactoryBot.build(:order)
+     @order.user_id = FactoryBot.build(:user)
+     @order.product_id = FactoryBot.build(:product)
   end
   describe '商品購入が上手くいくとき' do
     context '商品の購入' do
       it 'すべての項目が入力されていれば商品購入できる。' do
+        expect(@order).to be_valid
+      end
+      it '建物名がなくても購入できる' do
+        @order.building_name = nil
         expect(@order).to be_valid
       end
     end
@@ -34,7 +40,7 @@ RSpec.describe Order, type: :model do
         expect(@order.errors.full_messages).to include "Postal code is invalid"
       end
       it '都道府県を選択しないと購入できない' do
-        @order.prefecture_id = "1"
+        @order.prefecture_id = 1
         @order.valid?
         expect(@order.errors.full_messages).to include "Prefecture Select"
       end
@@ -67,6 +73,16 @@ RSpec.describe Order, type: :model do
         @order.phone_number = "０９０２２３３２２３３"
         @order.valid?
         expect(@order.errors.full_messages).to include "Phone number is not a number"
+      end
+      it 'user_idがなければ購入できない' do
+        @order.user_id = nil
+        @order.valid?
+        expect(@order.errors.full_messages).to include "User can't be blank"
+      end
+      it 'product_idがなければ購入できない' do
+        @order.product_id = nil
+        @order.valid?
+        expect(@order.errors.full_messages).to include "Product can't be blank"
       end
     end
   end
