@@ -5,10 +5,6 @@ class OrdersController < ApplicationController
     @product = Product.find(params[:product_id])
     @order = Order.new
   end
-
-  def new
-    @order = Order.new(order_params)
-  end
   
   def create
     @product = Product.find(params[:product_id])
@@ -47,7 +43,7 @@ class OrdersController < ApplicationController
   end
 
   def no_purchase
-    if @product.purchase_record
+    unless @product.purchase_record = nil
      redirect_to root_path
     end
   end
