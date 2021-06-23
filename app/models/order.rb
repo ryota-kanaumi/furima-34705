@@ -9,7 +9,8 @@ class Order
     validates :postal_code, format: { with: VALID_POSTAL_CODE_REGEX }
     validates :municipality, format: { with: /\A[ぁ-んァ-ン一-龥]/ }
     validates :address
-
+    validates :user_id
+    validates :product_id
     validates :phone_number, numericality: { with: /\A\d{10,11}\z/ }
   end
 
