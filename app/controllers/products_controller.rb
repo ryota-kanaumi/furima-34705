@@ -25,6 +25,9 @@ class ProductsController < ApplicationController
   end
 
   def edit
+    unless product.purchase_record == nil
+      redirect_to root_path
+    end
   end
 
   def update
@@ -53,12 +56,11 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
+
   def user_check
     unless @product.user == current_user
       redirect_to root_path
     end
   end
-
-
 
 end
