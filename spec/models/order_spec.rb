@@ -74,6 +74,16 @@ RSpec.describe Order, type: :model do
         @order.valid?
         expect(@order.errors.full_messages).to include "Phone number is not a number"
       end
+      it '電話番号が12桁では購入できない' do
+        @order.phone_number = "123123123123"
+        @order.valid?
+        expect(@order.errors.full_messages).to include "Phone number is too long (maximum is 11 characters)"
+      end
+      it '電話番号が英数混合では購入できない' do
+        @order.phone_number = "abc12345678"
+        @order.valid?
+        expect(@order.errors.full_messages).to include "Phone number is not a number"
+      end
       it 'user_idがなければ購入できない' do
         @order.user_id = nil
         @order.valid?

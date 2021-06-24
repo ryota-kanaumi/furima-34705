@@ -11,7 +11,7 @@ class Order
     validates :address
     validates :user_id
     validates :product_id
-    validates :phone_number, numericality: { with: /\A\d{10,11}\z/ }
+    validates :phone_number, numericality: true, length: { minimum: 10 }, length: { maximum: 11 }
   end
 
   validates :prefecture_id, numericality: { other_than: 1, message: 'Select'}
