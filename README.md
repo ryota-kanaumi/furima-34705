@@ -65,7 +65,7 @@ has_one :purchase_record
 |Column    |Type       |Options  |
 |----------|-----------|---------|
 |postal_code|string   |NOT NULL |
-|prefectures_id|string    |NOT NULL |
+|prefectures_id|integer    |NOT NULL |
 |municipality|string|NOT NULL|
 |address|string|NOT NULL|
 |building_name|string| |
