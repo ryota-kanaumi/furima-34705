@@ -7,7 +7,7 @@ class Order
     validates :token
     VALID_POSTAL_CODE_REGEX = /\A\d{3}[-]\d{4}\z/ 
     validates :postal_code, format: { with: VALID_POSTAL_CODE_REGEX }
-    validates :municipality, format: { with: /\A[ぁ-んァ-ン一-龥]/ }
+    validates :municipality
     validates :address
     validates :user_id
     validates :product_id
