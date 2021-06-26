@@ -1,13 +1,15 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!,:move_to_index, :no_purchase
+  before_action :authenticate_user!, only: [:index, :create]
+  before_action :product_find, only: [:index, :create]
+  before_action :move_to_index,  only: [:index, :create]
+  before_action :no_purchase , only: [:index, :create]
+  
 
   def index 
-    @product = Product.find(params[:product_id])
     @order = Order.new
   end
   
   def create
-    @product = Product.find(params[:product_id])
     @order = Order.new(order_params)
     if @order.valid?
       pay_item
@@ -34,16 +36,18 @@ class OrdersController < ApplicationController
       )
   end
 
-  def move_to_index
+  def product_find
     @product = Product.find(params[:product_id])
-    
+  end
+
+  def move_to_index
     if @product.user.id == current_user.id
-      redirect_to root_path 
+     redirect_to root_path
     end
   end
 
   def no_purchase
-    unless @product.purchase_record = nil
+    if @product.purchase_record != nil
      redirect_to root_path
     end
   end
