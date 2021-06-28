@@ -68,3 +68,4 @@ gem 'active_hash'
 gem 'ransack'
 gem 'rubocop', require: false
 gem 'payjp'
+gem "aws-sdk-s3", require: false
