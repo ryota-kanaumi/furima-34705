@@ -125,7 +125,7 @@
     <h2 class='title'>ピックアップカテゴリー</h2>
     <%= link_to '新規投稿商品',"#" , class: "subtitle" %>
     <ul class='item-lists'>
-      <% @products.each do |product| %>
+    <% @products.each do |product| %>
       <li class='list'>
         <%= link_to product_path(product.id) do %>
         <div class='item-img-content'>
@@ -150,7 +150,8 @@
         </div>
         <% end %>
       </li>
-    <% if @products.length == 0 %>
+    <% end %>
+    <% if @products.empty? %>
       <li class='list'>
         <%= link_to '#' do %>
         <%= image_tag "https://tech-master.s3.amazonaws.com/uploads/curriculums/images/Rails1-4/sample.jpg", class: "item-img" %>
@@ -168,7 +169,6 @@
         </div>
         <% end %>
       </li>
-      <% end %>
     <% end %>
     </ul>
   </div>
