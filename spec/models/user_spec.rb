@@ -52,8 +52,8 @@ require 'rails_helper'
          expect(@user.errors.full_messages).to include "Password can't be blank"
      end
      it "passwordは英字だけでは登録できない" do
-      @user.password = 'aaaaa'
-      @user.password_confirmation = 'aaaaa'
+      @user.password = 'aaaaaa'
+      @user.password_confirmation = 'aaaaaa'
       @user.valid?
       expect(@user.errors.full_messages).to include "Password is invalid"
      end

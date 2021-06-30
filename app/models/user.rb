@@ -17,7 +17,7 @@ class User < ApplicationRecord
           validates :first_read_name
         end
 
-          VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])[a-z\d]{6,32}+\z/
+          VALID_PASSWORD_REGEX = /\A(?=\d{0,99}+[a-z])(?=[a-z]{0,99}+\d)[a-z\d]{6,32}+\z/i
           validates :password, length: { minimum: 6, maximum: 32}, format: { with: VALID_PASSWORD_REGEX}
           VALID_LAST_NAME_REGEX = /\A[ぁ-んァ-ン一-龥々ー]+\z/
           validates :last_name, format: { with: VALID_LAST_NAME_REGEX}

@@ -49,11 +49,6 @@ RSpec.describe Order, type: :model do
         @order.valid?
         expect(@order.errors.full_messages).to include "Municipality can't be blank"
       end
-      it '市区町村には半角英数字は購入できない' do
-        @order.municipality = "abc111"
-        @order.valid?
-        expect(@order.errors.full_messages).to include "Municipality is invalid"
-      end
       it '番地が空では購入できない' do
         @order.address = nil
         @order.valid?
