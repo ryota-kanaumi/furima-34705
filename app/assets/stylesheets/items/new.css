@@ -90,7 +90,9 @@
 }
 
 /* /出品画像 */
-
+img{
+  max-width:100%;
+}
 /* 商品名と商品説明 */
 .new-items {
   padding: 2vh 0;
