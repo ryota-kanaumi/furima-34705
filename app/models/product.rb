@@ -11,7 +11,7 @@ class Product < ApplicationRecord
     belongs_to :shipping_area
     belongs_to :delivery_day
     with_options presence: true do
-        validates :image
+        validates :images
         validates :product_name
         validates :product_description
         validates :price

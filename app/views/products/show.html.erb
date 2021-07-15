@@ -8,8 +8,9 @@
     </h2>
 
     <div class="item-img-content">
-      <%= image_tag @product.image ,class:"item-box-img" %>
-
+    <% @product.images.each do |images| %>
+      <%= image_tag images ,class:"item-box-img" %>
+    <% end %>
       <% if @product.purchase_record.present? %>
        <div class="sold-out"> 
          <span>Sold Out!!</span> 
