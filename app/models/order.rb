@@ -14,7 +14,7 @@ class Order
     validates :phone_number, numericality: true, length: { minimum: 10 }, length: { maximum: 11 }
   end
 
-  validates :prefecture_id, numericality: { other_than: 1, message: 'Select'}
+  validates :prefecture_id, numericality: { other_than: 1, message: '選択してください'}
 
   def save
     purchase_record = PurchaseRecord.create(product_id: product_id, user_id: user_id)

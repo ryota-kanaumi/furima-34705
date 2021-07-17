@@ -17,7 +17,7 @@ class Product < ApplicationRecord
         validates :price
     end
 
-    with_options numericality: { other_than: 1, message: 'Select'} do
+    with_options numericality: { other_than: 1, message: '選択してください'} do
         validates :category_id
         validates :product_condition_id
         validates :delivery_charge_id
@@ -28,6 +28,6 @@ class Product < ApplicationRecord
     validates :product_name, length: { maximum: 40 }
     validates :product_description, length: { maximum: 1000 }
 
-    validates :price, numericality: { with: /\A[0-9]+\z/, message: 'Half-width number' }
-    validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'Out of setting range' }
+    validates :price, numericality: { with: /\A[0-9]+\z/, message: 'は半角で入力してください' }
+    validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'は300円〜9,999,999の範囲で入力してください' }
 end
