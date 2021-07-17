@@ -144,7 +144,6 @@ require 'rails_helper'
       it 'メールアドレスは、@がないと登録できない' do
         @user.email = 'hogehoge.jp'
         @user.valid?
-        binding.pry
         expect(@user.errors.full_messages).to include "Eメールは不正な値です"
       end
     end
