@@ -22,72 +22,72 @@ RSpec.describe Order, type: :model do
       it 'クレジットカード情報が入力されていなければ購入できない。' do
         @order.token = nil
         @order.valid?
-        expect(@order.errors.full_messages).to include "Token can't be blank"
+        expect(@order.errors.full_messages).to include "カード情報を入力してください"
       end
       it '郵便番号が空では購入できない' do
         @order.postal_code = nil
         @order.valid?
-        expect(@order.errors.full_messages).to include "Postal code can't be blank"
+        expect(@order.errors.full_messages).to include "郵便番号を入力してください"
       end
       it '郵便番号が６桁では購入できない' do
         @order.postal_code = "123-123"
         @order.valid?
-        expect(@order.errors.full_messages).to include "Postal code is invalid"
+        expect(@order.errors.full_messages).to include "郵便番号は不正な値です"
       end
       it '郵便番号がハイフンなしでは購入できない' do
         @order.postal_code = "1234567"
         @order.valid?
-        expect(@order.errors.full_messages).to include "Postal code is invalid"
+        expect(@order.errors.full_messages).to include "郵便番号は不正な値です"
       end
       it '都道府県を選択しないと購入できない' do
         @order.prefecture_id = 1
         @order.valid?
-        expect(@order.errors.full_messages).to include "Prefecture Select"
+        expect(@order.errors.full_messages).to include "都道府県選択してください"
       end
       it '市区町村を入力しないと購入できない' do
         @order.municipality = nil
         @order.valid?
-        expect(@order.errors.full_messages).to include "Municipality can't be blank"
+        expect(@order.errors.full_messages).to include "市区町村を入力してください"
       end
       it '番地が空では購入できない' do
         @order.address = nil
         @order.valid?
-        expect(@order.errors.full_messages).to include "Address can't be blank"
+        expect(@order.errors.full_messages).to include "番地を入力してください"
       end
       it '電話番号が空では購入できない' do
         @order.phone_number = nil
         @order.valid?
-        expect(@order.errors.full_messages).to include "Phone number can't be blank"
+        expect(@order.errors.full_messages).to include "電話番号を入力してください"
       end
       it '電話番号が数字以外では購入できない' do
         @order.phone_number = "玉子焼き"
         @order.valid?
-        expect(@order.errors.full_messages).to include "Phone number is not a number"
+        expect(@order.errors.full_messages).to include "電話番号は数値で入力してください"
       end
       it '電話番号が全角数字では購入できない' do
         @order.phone_number = "０９０２２３３２２３３"
         @order.valid?
-        expect(@order.errors.full_messages).to include "Phone number is not a number"
+        expect(@order.errors.full_messages).to include "電話番号は数値で入力してください"
       end
       it '電話番号が12桁では購入できない' do
         @order.phone_number = "123123123123"
         @order.valid?
-        expect(@order.errors.full_messages).to include "Phone number is too long (maximum is 11 characters)"
+        expect(@order.errors.full_messages).to include "電話番号は11文字以内で入力してください"
       end
       it '電話番号が英数混合では購入できない' do
         @order.phone_number = "abc12345678"
         @order.valid?
-        expect(@order.errors.full_messages).to include "Phone number is not a number"
+        expect(@order.errors.full_messages).to include "電話番号は数値で入力してください"
       end
       it 'user_idがなければ購入できない' do
         @order.user_id = nil
         @order.valid?
-        expect(@order.errors.full_messages).to include "User can't be blank"
+        expect(@order.errors.full_messages).to include "Userを入力してください"
       end
       it 'product_idがなければ購入できない' do
         @order.product_id = nil
         @order.valid?
-        expect(@order.errors.full_messages).to include "Product can't be blank"
+        expect(@order.errors.full_messages).to include "Productを入力してください"
       end
     end
   end
