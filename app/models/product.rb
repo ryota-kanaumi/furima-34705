@@ -2,6 +2,9 @@ class Product < ApplicationRecord
     belongs_to :user, optional: true
     has_many_attached :images
     has_one :purchase_record 
+    #タグ付機能の追加
+    has_many :product_tag_relations
+    has_many :tags, through: :product_tag_relations
     
     #activehashの導入
     extend ActiveHash::Associations::ActiveRecordExtensions
