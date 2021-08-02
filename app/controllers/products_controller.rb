@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show, :search]
   before_action :product, only: [:show, :edit, :update, :destroy]
   before_action :user_check, only: [:edit, :update, :destroy]
 
@@ -37,15 +37,12 @@ class ProductsController < ApplicationController
     end
   end
 
-
   def destroy
      @product.destroy
      redirect_to root_path
   end
 
-  def search
-    @results = @p.result.includes(:category)  
-  end
+  
 
   private
 
@@ -64,10 +61,6 @@ class ProductsController < ApplicationController
     unless @product.user == current_user
       redirect_to root_path
     end
-  end
-
-  def search_product
-    @p = Product.ransack(params[:q])  
   end
 
 end

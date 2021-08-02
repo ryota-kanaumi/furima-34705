@@ -2,9 +2,6 @@ class Product < ApplicationRecord
     belongs_to :user, optional: true
     has_many_attached :images
     has_one :purchase_record 
-    #タグ付機能の追加
-    has_many :product_tag_relations
-    has_many :tags, through: :product_tag_relations
     
     #activehashの導入
     extend ActiveHash::Associations::ActiveRecordExtensions
@@ -33,4 +30,13 @@ class Product < ApplicationRecord
 
     validates :price, numericality: { with: /\A[0-9]+\z/, message: 'は半角で入力してください' }
     validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'は300円〜9,999,999の範囲で入力してください' }
+    
+    #検索機能の追加
+    def self.search(search)
+      if search != ""
+        Product.where('text LIKE(?)', "%#{search}%")
+      else
+        Product.all
+      end
+    end
 end
