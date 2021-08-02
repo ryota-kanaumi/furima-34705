@@ -43,6 +43,10 @@ class ProductsController < ApplicationController
      redirect_to root_path
   end
 
+  def search
+    @results = @p.result.includes(:category)  
+  end
+
   private
 
   def product_params
@@ -60,6 +64,10 @@ class ProductsController < ApplicationController
     unless @product.user == current_user
       redirect_to root_path
     end
+  end
+
+  def search_product
+    @p = Product.ransack(params[:q])  
   end
 
 end
