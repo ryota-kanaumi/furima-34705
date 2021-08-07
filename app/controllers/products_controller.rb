@@ -42,7 +42,9 @@ class ProductsController < ApplicationController
      redirect_to root_path
   end
 
-  
+  def search
+    @products = Product.search(params[:keyword])
+  end
 
   private
 
@@ -64,3 +66,5 @@ class ProductsController < ApplicationController
   end
 
 end
+
+#次はsearchアクションが呼ばれたあとのviewを作成
